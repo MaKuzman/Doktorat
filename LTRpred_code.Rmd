@@ -1,0 +1,11 @@
+library(LTRpred)
+source("/common/WORK/mfabijanic/programs/LTRpred/R/LTRpred.R")
+source("/common/WORK/mfabijanic/programs/LTRpred/R/ORFpred.R")
+source("/common/WORK/mfabijanic/programs/LTRpred/R/test_installation_usearch.R")
+source("/common/WORK/mfabijanic/programs/LTRpred/R/test_installation_gt.R")
+source("/common/WORK/mfabijanic/programs/LTRpred/R/test_installation_hmmer.R")
+source("/common/WORK/mfabijanic/programs/LTRpred/R/test_installation_vsearch.R")
+source("/common/WORK/mfabijanic/programs/LTRpred/R/test_installation_blast.R")
+source("/common/WORK/mfabijanic/programs/LTRpred/R/test_installation_perl.R")
+
+LTRpred(genome.file="EsuV5.2.fasta", cluster=T, cores=10)
