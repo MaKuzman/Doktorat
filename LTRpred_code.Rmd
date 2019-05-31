@@ -27,6 +27,12 @@ hmmpress Dfam.hmm
 perl5.18.2 ./dfamscan.pl --fastafile EsuV5-ltrdigest_complete.fas_nt.fsa --hmmfile Dfam.hmm --dfam_outfile EsuV5_dfam.out --E 0.0001 --masking_thresh --cpu 22 
 exit
 
+
+#FOR THE MOUSE:
+/common/WORK/mfabijanic/Svoboda/April2019/LTRs/mouseLTRpred/mm10_ltrpred/
+perl5.18.2 /common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/dfamscan.pl --fastafile $INFILE --hmmfile /common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/Dfam.hmm --dfam_outfile $OUTFILE --E 0.0001 --masking_thresh --cpu 22 
+
+
 ```
 
 Annotation in R, since dfam did not work through R, i ran it by myself:
@@ -39,7 +45,7 @@ tabout.file= "/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/E
 LTRpred.folder="/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/",  
 annotate="Dfam", 
 Dfam.db = "/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred", 
-dfam.file="/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/EsuV5_dfam.out"
+dfam.file="/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/EsuV5_dfam.out",
 fix.chr.name=FALSE,
 similar=50,
 cores=10 )
