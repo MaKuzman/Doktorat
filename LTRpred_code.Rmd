@@ -1,3 +1,6 @@
+R:
+
+```
 library(LTRpred)
 source("/common/WORK/mfabijanic/programs/LTRpred/R/LTRpred.R")
 source("/common/WORK/mfabijanic/programs/LTRpred/R/ORFpred.R")
@@ -7,5 +10,37 @@ source("/common/WORK/mfabijanic/programs/LTRpred/R/test_installation_hmmer.R")
 source("/common/WORK/mfabijanic/programs/LTRpred/R/test_installation_vsearch.R")
 source("/common/WORK/mfabijanic/programs/LTRpred/R/test_installation_blast.R")
 source("/common/WORK/mfabijanic/programs/LTRpred/R/test_installation_perl.R")
+source("/common/WORK/mfabijanic/programs/LTRpred/R/dfam.query.R")
+
 
 LTRpred(genome.file="EsuV5.2.fasta", cluster=T, cores=10)
+
+```
+
+In bash:
+
+```
+qsub -I -l select=1:ncpus=24:mem=100G -N dff
+cd /common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/
+
+hmmpress Dfam.hmm
+perl5.18.2 ./dfamscan.pl --fastafile EsuV5-ltrdigest_complete.fas_nt.fsa --hmmfile Dfam.hmm --dfam_outfile EsuV5_dfam.out --E 0.0001 --masking_thresh --cpu 22 
+exit
+
+```
+
+Annotation in R, since dfam did not work through R, i ran it by myself:
+```
+LTRpred(genome.file="EsuV5.2.fasta", 
+index.file.harvest="/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/EsuV5_ltrharvest/EsuV5_index.fsa",
+index.file.digest = "/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/EsuV5_ltrdigest/EsuV5_index_ltrdigest.fsa",
+LTRdigest.gff = "/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/EsuV5_ltrdigest/EsuV5_LTRdigestPrediction.gff",
+tabout.file= "/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/EsuV5_ltrdigest/EsuV5-ltrdigest_tabout.csv",
+LTRpred.folder="/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/",  
+annotate="Dfam", 
+Dfam.db = "/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred", 
+dfam.file="/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/EsuV5_dfam.out"
+fix.chr.name=FALSE,
+similar=50,
+cores=10 )
+```
