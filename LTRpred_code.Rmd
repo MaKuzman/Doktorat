@@ -13,7 +13,15 @@ source("/common/WORK/mfabijanic/programs/LTRpred/R/test_installation_perl.R")
 source("/common/WORK/mfabijanic/programs/LTRpred/R/dfam.query.R")
 
 
-LTRpred(genome.file="EsuV5.2.fasta", cluster=T, cores=10)
+
+LTRpred(genome.file="EsuV5.2.fasta", 
+hmms        = paste0(system.file("HMMs/", package = "LTRpred"), "hmm_*"),
+trnas = "/common/WORK/mfabijanic/Sponges/Annotation/trnascan/Esu_parts/EsutRNA_1-20.fasta",
+LTRpred.folder="/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/",  
+annotate="Dfam", Dfam.db = "/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/EsuV5_ltrpred/Dfam.hmm", 
+fix.chr.name=FALSE,
+similar=50,
+cores=22 )
 
 ```
 
