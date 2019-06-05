@@ -1,0 +1,80 @@
+library(data.table)
+library(stringr)
+
+setwd("/common/WORK/mfabijanic/Sponges/Annotation/LTRPred/DFAM_Annotated")
+
+allSponges <- data.table()
+esu <- fread('awk \'{print $1}\' Esu_dfam.out')
+esu$Sponge <- "Eunapius"
+colnames(esu)[1] <- "Repeat"
+allSponges <- rbind(allSponges, esu)
+
+esu <- fread('awk \'{print $1}\' Amphimedon_dfam.out')
+esu$Sponge <- "Amphimedon"
+colnames(esu)[1] <- "Repeat"
+allSponges <- rbind(allSponges, esu)
+
+esu <- fread('awk \'{print $1}\' Sub_dfam.out')
+esu$Sponge <- "Suberites"
+colnames(esu)[1] <- "Repeat"
+allSponges <- rbind(allSponges, esu)
+
+esu <- fread('awk \'{print $1}\' Sycon_dfam.out')
+esu$Sponge <- "Sycon"
+colnames(esu)[1] <- "Repeat"
+allSponges <- rbind(allSponges, esu)
+
+esu <- fread('awk \'{print $1}\' Tethya_dfam.out')
+esu$Sponge <- "Tethya"
+colnames(esu)[1] <- "Repeat"
+allSponges <- rbind(allSponges, esu)
+
+esu <- fread('awk \'{print $1}\' Stylisa_dfam.out')
+esu$Sponge <- "Stylisa"
+colnames(esu)[1] <- "Repeat"
+allSponges <- rbind(allSponges, esu)
+
+esu <- fread('awk \'{print $1}\' Emu_dfam.out')
+esu$Sponge <- "Ephidatia"
+colnames(esu)[1] <- "Repeat"
+allSponges <- rbind(allSponges, esu)
+
+esu <- fread('awk \'{print $1}\' Xestospongia_dfam.out')
+esu$Sponge <- "Xestospongia"
+colnames(esu)[1] <- "Repeat"
+allSponges <- rbind(allSponges, esu)
+
+allSponges <- dcast(allSponges[,.(RepeatInSponge=.N), .(Sponge, Repeat)], fill=0, formula=Repeat~Sponge, value.var="RepeatInSponge")
+molted <- melt(allSponges, id.vars="Repeat", variable.name="Sponge",value.name="NRepeatInSponge")
+molted<-molted[NRepeatInSponge>0]
+molted[,.N,Repeat][order(-N)]
+accordLocations <- fread('grep ACCORD_I *')
+accordLocations[, scaffold:=c("Contig13190 ", "183","337", "393", "598", "scaffold_1326$", "scaffold_2219$",
+"scaffold_2369$", "scaffold_391$", "scaffold_573$", "scaffold_666$", "scaffold35623$", "scaffold79447$", "Scaffold3008$", "scis770$", 
+"twilhelma_v1_0706_", "twilhelma_v1_0842_", "twilhelma_v1_0856_")]
+accordLocations[,from:=c(96027,15794,10188,4509,1966,18139,8883,9844,47109,31694,88360,2251,76184,7035,1211,4281,34907,17062)]
+accordLocations[, to:=c(101951,20960,15300,9713,6873,22759,13715,14612,52188,38041,93109,7120,81124,13254,11279,10219,41461,36030)]
+
+ESU <- readDNAStringSet("/common/WORK/mfabijanic/Sponges/CURRENT/GENOMES/EsuV5.2.fasta")
+EMU <- readDNAStringSet("/common/WORK/mfabijanic/Sponges/CURRENT/GENOMES/Emu_Illumina_out.padded.fasta")
+SYC <- readDNAStringSet("/common/WORK/mfabijanic/Sponges/CURRENT/GENOMES/sycon.genome.fa")
+AMP <- readDNAStringSet("/common/WORK/mfabijanic/Sponges/CURRENT/GENOMES/Amphimedon_queenslandica.Aqu1.dna.toplevel.fa")
+TET <- readDNAStringSet("/common/WORK/mfabijanic/Sponges/CURRENT/GENOMES/TethyaWilhelma/TethyaWilhelma.fasta")
+SUB <- readDNAStringSet("/common/WORK/mfabijanic/Sponges/CURRENT/GENOMES/Sub_v0.02.fa")
+STY <- readDNAStringSet("/common/WORK/mfabijanic/Sponges/CURRENT/GENOMES/SC_genome_800.fa")
+
+
+getSequenceFrom <- function(GENOME,cname,start,end){
+    contigaccorddAmp <- GENOME[grep(cname,names(GENOME))]
+    if(length(contigaccorddAmp)>1) return (DNAString(""))
+    ampACCORD <- DNAStringSet(Views(unlist(contigaccorddAmp), start, end))
+    unlist(ampACCORD)
+}
+
+AllSequences <- DNAStringSet(sapply(1:nrow(accordLocations),function(i)
+getSequenceFrom(allGenomes, accordLocations$scaffold[i], accordLocations$from[i], accordLocations$to[i])
+))
+
+names(AllSequences) <- accordLocations$V1
+AllSequences <- AllSequences[width(AllSequences)>0]
+
