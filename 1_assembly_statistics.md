@@ -15,14 +15,15 @@ $QUAST *fasta
 ```
 ### BUSCO
 
-I am calculating BUSCO completeness for all the genomes:
+I am calculating BUSCO long completeness for all the genomes:
 
 ```
 BUSCO_FOLDER=/common/WORK/mfabijanic/programs/busco/
 
-for i in `ls *fasta`; do 
+for i in `ls *fasta`
+do 
 cd ${i%%.*}
-$BUSCO_FOLDER/scripts/run_BUSCO.py -i ../$i -o ${i%%.*} -m geno -l $BUSCO_FOLDER/metazoa_odb9 -c 10 -sp amphimedon -t . --long 
+wget -O - https://raw.githubusercontent.com/MaKuzman/Doktorat/master/buscoLong.sh | qsub -v i=$i ; 
 cd ..
 done
 
