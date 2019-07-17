@@ -33,7 +33,7 @@ Generating busco plot:
 
 ```
 cd /common/WORK/mfabijanic/Sponges/CURRENT/GENOMES/Statistics/busco
-mv ../*/run_*[^{busco}]/short* .
+mv ../../*/run_*/short* .
 wget -O busco_figure.R  https://raw.githubusercontent.com/MaKuzman/Doktorat/master/busco_figure.R ; Rscript busco_figure.R
 ```
 
