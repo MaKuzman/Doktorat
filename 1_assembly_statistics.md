@@ -28,3 +28,13 @@ done
 
 
 ```
+
+Generating busco plot:
+
+```
+cd /common/WORK/mfabijanic/Sponges/CURRENT/GENOMES/Statistics/busco
+mv ../*/run_*_busco/short_summary_* .
+Rscript busco_figure.R
+
+```
+
