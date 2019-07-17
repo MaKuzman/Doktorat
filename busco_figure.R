@@ -26,8 +26,8 @@ my_colors <- c("#56B4E9", "#3492C7", "#F0E442", "#F04442")
 my_bar_height <- 0.75
 
 # Legend
-my_title <- "BUSCO Assessment Results"
-
+#my_title <- "BUSCO Assessment Results"
+my_title <- ""
 # Font
 my_family <- "sans"
 my_size_ratio <- 1
@@ -69,12 +69,12 @@ figure <- ggplot() +
   ylab("\n%BUSCOs") + 
 
   theme(plot.title = element_text(family=my_family, colour = "black", size = rel(2.2)*my_size_ratio, face = "bold")) + 
-  theme(legend.position="top",legend.title = element_blank()) + 
+  theme(legend.position="bottom",legend.title = element_blank()) + 
   theme(legend.text = element_text(family=my_family, size = rel(1.2)*my_size_ratio)) + 
   theme(panel.background = element_rect(color="#FFFFFF", fill="white")) + 
   theme(panel.grid.minor = element_blank()) + 
   theme(panel.grid.major = element_blank()) +
-  theme(axis.text.y = element_text(family=my_family, colour = "black", size = rel(1.66)*my_size_ratio)) + 
+  theme(axis.text.y = element_text(family=my_family, colour = "black", size = rel(1.66)*my_size_ratio, face = "italic")) + 
   theme(axis.text.x = element_text(family=my_family, colour = "black", size = rel(1.66)*my_size_ratio)) + 
   theme(axis.line = element_line(size=1*my_size_ratio, colour = "black")) + 
   theme(axis.ticks.length = unit(.85, "cm")) + 
