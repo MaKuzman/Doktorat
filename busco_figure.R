@@ -87,7 +87,7 @@ figure <- ggplot() +
   guides(fill=guide_legend(nrow=2,byrow=TRUE))
   
   for(i in rev(c(1:length(levels(my_species))))){
-    detailed_values <- my_values[my_species==my_species[my_species==levels(my_species)[i]]]
+    detailed_values <- my_percentage[my_species==my_species[my_species==levels(my_species)[i]]]
     totals <- sum(detailed_values)
     figure <- figure + 
     annotate("text", label=paste("C:", detailed_values[1] + detailed_values[2], " [S:", detailed_values[1], ", D:", detailed_values[2], "], F:", detailed_values[3], ", M:", detailed_values[4], ", n:", totals, sep=""), 
