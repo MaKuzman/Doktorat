@@ -18,7 +18,6 @@ $QUAST *fasta
 I am calculating BUSCO long completeness for all the genomes:
 
 ```
-BUSCO_FOLDER=/common/WORK/mfabijanic/programs/busco/
 
 for i in `ls *fasta`
 do 
