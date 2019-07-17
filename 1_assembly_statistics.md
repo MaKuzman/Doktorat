@@ -22,7 +22,7 @@ BUSCO_FOLDER=/common/WORK/mfabijanic/programs/busco/
 
 for i in `ls *fasta`; do 
 cd ${i%%.*}
-$BUSCO_FOLDER/scripts/run_BUSCO.py -i ../$i -o ${i%%.*}_busco -m geno -l $BUSCO_FOLDER/metazoa_odb9 -c 4 -sp amphimedon -t . 
+$BUSCO_FOLDER/scripts/run_BUSCO.py -i ../$i -o ${i%%.*} -m geno -l $BUSCO_FOLDER/metazoa_odb9 -c 10 -sp amphimedon -t . --long 
 cd ..
 done
 
