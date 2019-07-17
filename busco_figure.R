@@ -15,7 +15,7 @@ library("grid")
 
 # !!! CONFIGURE YOUR PLOT HERE !!! 
 # Output
-my_output <- paste("/common/WORK/mfabijanic/Sponges/CURRENT/GENOMES/Statistics/busco/","busco_figure.png",sep="/") 
+my_output <- paste("/common/WORK/mfabijanic/Sponges/CURRENT/GENOMES/Statistics/busco/","busco_figure.pdf",sep="/") 
 my_width <- 20
 my_height <- 15
 my_unit <- "cm"
