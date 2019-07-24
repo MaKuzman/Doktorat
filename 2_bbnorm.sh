@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -N Nmaja
+#PBS -N normalize
 
 #PBS -m bea
 #PBS -M maja@kuzman.org
