@@ -10,7 +10,7 @@
 cd $PBS_O_WORKDIR
 
 PORECHOP=/common/WORK/mfabijanic/programs/Porechop/porechop-runner.py
-
+wget wget https://raw.githubusercontent.com/MaKuzman/Doktorat/master/porechopOne.sh
 
 for i in `ls /common/scratch/kristian/Nanopore_basecall/LSK108/workspace/fail/`
 do
